@@ -405,6 +405,62 @@
     $("#myths").innerHTML = list.map(m => '<div class="myth ' + BK[m.b] + '" role="button" tabindex="0" aria-pressed="false"><div class="myth-in"><div class="face front"><span class="pill ' + BK[m.b] + '"><i></i>' + BLOCKS[m.b] + '</span><span class="tag">Mythos</span><q>' + esc(m.m) + '</q><span class="flip-hint">Umdrehen <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M4 12a8 8 0 0 1 14-5.3M20 4v5h-5M20 12a8 8 0 0 1-14 5.3M4 20v-5h5"/></svg></span></div><div class="face back"><span class="tag">Was die Studien sagen</span><p>' + esc(m.f) + '</p><span class="src-ref">Recherche ' + m.d + "</span></div></div></div>").join("");
   }
 
+  /* ---------- Mythen-Quiz ---------- */
+  const QN = 10, quizBox = $("#quiz-box");
+  let qz = null;
+  const shuffle = a => { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
+  const qBest = () => { try { return +localStorage.getItem("ma-quiz-best") || 0; } catch (e) { return 0; } };
+  const ICON_OK = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>';
+  const ICON_NO = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>';
+  function newQuiz() {
+    const myths = shuffle(MYTHS).slice(0, QN / 2).map(x => Object.assign({ t: false }, x));
+    const facts = shuffle(FACTS).slice(0, QN / 2).map(x => Object.assign({ t: true }, x));
+    qz = { list: shuffle(myths.concat(facts)), i: 0, res: [] };
+    quizBox.innerHTML = '<div class="qz-top"><span class="qz-step" id="qz-step"></span><span class="qz-score" id="qz-score"></span></div><div class="qz-track" id="qz-track">' + "<i></i>".repeat(QN) + '</div><div class="qz-card" id="qz-card"></div>';
+    renderQ();
+  }
+  function track() {
+    $$("#qz-track i").forEach((el, k) => { el.className = k < qz.res.length ? (qz.res[k] ? "ok" : "bad") : k === qz.i ? "cur" : ""; });
+    const pts = qz.res.filter(Boolean).length;
+    $("#qz-score").textContent = pts + (pts === 1 ? " Punkt" : " Punkte");
+  }
+  function renderQ() {
+    const q = qz.list[qz.i];
+    $("#qz-step").textContent = "Frage " + (qz.i + 1) + " von " + QN;
+    track();
+    $("#qz-card").innerHTML = '<div class="qz-in"><span class="pill ' + BK[q.b] + '"><i></i>' + BLOCKS[q.b] + '</span><q class="qz-q">' + esc(q.m) + '</q><div class="qz-actions"><button type="button" class="qz-btn yes" data-a="1">' + ICON_OK + 'Stimmt</button><button type="button" class="qz-btn no" data-a="0">' + ICON_NO + 'Mythos</button></div><div class="qz-fb" id="qz-fb" aria-live="polite"></div></div>';
+  }
+  function answer(a) {
+    const q = qz.list[qz.i], ok = a === q.t;
+    qz.res.push(ok);
+    $$("#qz-card .qz-btn").forEach(b => { b.disabled = true; const v = b.dataset.a === "1"; if (v === q.t) b.classList.add("right"); if (v === a) b.classList.add("picked"); if (v === a && !ok) b.classList.add("wrong"); });
+    $("#qz-card").classList.toggle("was-ok", ok); $("#qz-card").classList.toggle("was-bad", !ok);
+    const last = qz.i === QN - 1;
+    $("#qz-fb").innerHTML = '<div class="qz-verdict ' + (ok ? "ok" : "bad") + '"><strong>' + (ok ? "Richtig!" : "Daneben.") + "</strong> " + (q.t ? "Das stimmt." : "Das ist ein Mythos.") + '</div><p>' + esc(q.f) + '</p><div class="qz-foot"><span class="src-ref">Recherche ' + esc(q.d) + '</span><button type="button" class="btn primary qz-next">' + (last ? "Ergebnis ansehen" : "Weiter") + ' <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button></div>';
+    track();
+    const nx = $(".qz-next"); if (nx) nx.focus({ preventScroll: true });
+  }
+  function result() {
+    const pts = qz.res.filter(Boolean).length, prev = qBest();
+    if (pts > prev) { try { localStorage.setItem("ma-quiz-best", pts); } catch (e) {} }
+    const verdict = pts === QN ? "Perfekt. Kein einziger Mythos hat dich erwischt." : pts >= 8 ? "Stark. Kaum ein Gym-Mythos erwischt dich." : pts >= 5 ? "Solide. Ein paar Mythen halten sich noch." : "Da hält sich noch einiges. Die Mythen-Karten oben helfen.";
+    const miss = qz.list.filter((q, k) => !qz.res[k]);
+    $("#qz-step").textContent = "Ergebnis";
+    qz.i = QN; track();
+    $("#qz-card").classList.remove("was-ok", "was-bad");
+    $("#qz-card").innerHTML = '<div class="qz-in qz-end"><div class="qz-big"><span>' + pts + '</span>/' + QN + '</div><p class="qz-verdict-big">' + verdict + '</p><p class="small">' + (pts > prev && prev > 0 ? "Neuer Bestwert! Vorher: " + prev + " von " + QN + "." : prev > 0 ? "Dein Bestwert: " + Math.max(prev, pts) + " von " + QN + "." : "Dein Bestwert wird nur in diesem Browser gespeichert.") + "</p>" +
+      (miss.length ? '<div class="qz-miss"><span class="tag">Das hat dich erwischt</span><ul>' + miss.map(q => '<li><span class="qz-sol ' + (q.t ? "t-true" : "t-false") + '">' + (q.t ? "Stimmt" : "Mythos") + "</span><span><b>" + esc(q.m) + "</b> " + esc(q.f) + "</span></li>").join("") + "</ul></div>" : "") +
+      '<div class="qz-actions end"><button type="button" class="btn primary qz-again">Neue Runde</button><a class="btn ghost" href="#mythen">Alle Mythen ansehen</a></div></div>';
+    const ag = $(".qz-again"); if (ag) ag.focus({ preventScroll: true });
+  }
+  quizBox.addEventListener("click", e => {
+    const b = e.target.closest("button"); if (!b || b.disabled) return;
+    if (b.classList.contains("qz-btn")) answer(b.dataset.a === "1");
+    else if (b.classList.contains("qz-next")) { if (qz.i === QN - 1) result(); else { qz.i++; renderQ(); const f = $("#qz-card .qz-btn"); if (f) f.focus({ preventScroll: true }); const y = quizBox.getBoundingClientRect().top; if (y < 60) quizBox.scrollIntoView({ block: "start" }); } }
+    else if (b.classList.contains("qz-again")) newQuiz();
+  });
+  newQuiz();
+
   /* ---------- Rechner ---------- */
   let plan = presetPlan("rec"), weighted = true;
   try { const s = JSON.parse(localStorage.getItem("ma-plan") || "null"); if (s) Object.keys(s).forEach(k => { if (GROUPS.find(g => g.id === k)) plan[k] = s[k]; }); } catch (e) {}

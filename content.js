@@ -103,3 +103,23 @@ const MYTHS = [
   { b: "R", m: "Dehnen beugt Muskelkater vor.", f: "0,5–1 von 100 Punkten weniger Schmerz, praktisch bedeutungslos.", d: "R4" },
   { b: "R", m: "Viel Muskelkater heißt gutes Training.", f: "Muskelkater ist kein Maß für Wachstum.", d: "R4" }
 ];
+
+/* Quiz: belegte Aussagen als Gegenstück zu den Mythen */
+const FACTS = [
+  { b: "T", m: "Von 6 auf 12 harte Sätze pro Woche wächst der Muskel spürbar mehr.", f: "Rund +1,7 Prozentpunkte Wachstum in ~10 Wochen, danach mit abnehmendem Zusatznutzen (Pelland 2026).", d: "T1" },
+  { b: "T", m: "Mit 25 Wiederholungen nah am Versagen wächst der Muskel etwa so gut wie mit 8.", f: "Zwischen ~5 und ~30 Wiederholungen wächst der Muskel gleich, wenn du nah ans Versagen gehst.", d: "T5" },
+  { b: "T", m: "Ohne Steigerung wächst der Muskel nur etwa halb so stark.", f: "Ohne Progression +11,6 statt +22,9 % (Kassiano 2026). Doppelte Progression und ein Trainingsprotokoll reichen.", d: "T7" },
+  { b: "T", m: "Beinstrecker und Beinpresse bauen den vorderen Oberschenkel nicht gleich gut auf.", f: "Rectus femoris +13,2 % mit Beinstrecker, aber nur +1,1 % mit Beinpresse (Kinoshita 2026, MRT).", d: "T4" },
+  { b: "T", m: "Bei gleichen Wochensätzen ist es fürs Wachstum fast egal, ob du einen Muskel 2× oder 3× pro Woche trainierst.", f: "Eine höhere Frequenz brachte bei gleichen Sätzen keinen gesicherten Vorteil.", d: "T3" },
+  { b: "E", m: "Schon ein Defizit von etwa 500 kcal am Tag kann den Muskelaufbau ganz stoppen.", f: "Ab etwa 500 kcal Defizit blieb im Schnitt kein Zuwachs übrig (Murphy & Koehler 2022).", d: "E1" },
+  { b: "E", m: "Für den Aufbau reicht ein kleiner Überschuss von etwa 250–400 kcal am Tag.", f: "Mehr Überschuss brachte bei Trainierten vor allem Fett, die Muskeldicke stieg gleich (Helms 2023).", d: "E1" },
+  { b: "E", m: "Mehr Protein bringt Trainierten mehr zusätzliche fettfreie Masse als Anfängern.", f: "Im Mittel +0,30 kg fettfreie Masse, bei Trainierten +1,05 kg (Morton 2018, 49 Studien).", d: "E2" },
+  { b: "E", m: "Nach einem kohlenhydratreichen Tag kann die Waage 1–2 kg mehr zeigen, ohne dass du Fett zugenommen hast.", f: "Glykogen und Wasser verschieben das Gewicht um bis zu 1–2 kg. Deshalb nur Wochenschnitte vergleichen.", d: "E5 · Q1" },
+  { b: "S", m: "Kreatin bringt vor allem Kraft und nur wenig zusätzlichen Muskel.", f: "Kraft +4,4 kg im Oberkörper und +11,4 kg im Unterkörper (Wang 2024); beim Muskel bewegt kein Supplement viel.", d: "S1" },
+  { b: "S", m: "Beim Kreatin-Start zeigt die Waage oft knapp 1 kg mehr.", f: "Das ist vor allem Wasser. Die ersten 2–4 Wochen beim Wiegen deshalb nicht werten.", d: "S1" },
+  { b: "S", m: "Koffein steigert die Maximalkraft kurzfristig etwas.", f: "Akut ~3 % mehr Maximalkraft mit 1,5–2,5 mg/kg, etwa 1–2 Tassen Kaffee.", d: "S3" },
+  { b: "S", m: "Pro Gramm Protein ist Whey teurer als Magerquark.", f: "30 g Protein kosten aus Whey 1,10–1,80 €, aus Magerquark 0,45–0,60 €.", d: "S2" },
+  { b: "R", m: "Fünf kurze Nächte senken die Muskelproteinsynthese messbar.", f: "Fünf Nächte à 4 h senkten sie um 19 % (Saner 2020).", d: "R2" },
+  { b: "R", m: "Ein Kältebad direkt nach dem Krafttraining kann den Muskelaufbau eher bremsen.", f: "Keine passive Maßnahme bringt Muskel; ein Kältebad direkt danach kostet eher. Deshalb kein Kältebad nach dem Krafttraining.", d: "R4" },
+  { b: "R", m: "Ausdauer direkt vor dem Krafttraining kostet Beinkraft.", f: "Deutlicher Kraftverlust (SMD 0,79; Markov 2022). Deshalb Kraft vor Ausdauer, möglichst ≥ 6 h Abstand.", d: "R1" }
+];

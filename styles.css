@@ -616,3 +616,60 @@ details.tview summary::-webkit-details-marker { display: none; }
 details.tview summary::before { content: "▸"; transition: transform .2s; display: inline-block; }
 details.tview[open] summary::before { transform: rotate(90deg); }
 details.tview table.data th { font-size: .78rem; color: var(--muted); font-weight: 600; }
+
+/* ===== Mythen-Quiz ===== */
+.quiz { max-width: 860px; margin: 0 auto; padding: clamp(20px, 4vw, 36px); }
+.qz-top { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; font-weight: 600; font-size: .92rem; }
+.qz-step { color: var(--muted); }
+.qz-score { font-variant-numeric: tabular-nums; }
+.qz-track { display: grid; grid-template-columns: repeat(10, 1fr); gap: 5px; margin: 10px 0 26px; }
+.qz-track i { height: 7px; border-radius: 4px; background: var(--line); transition: background .35s, transform .35s; }
+.qz-track i.cur { background: var(--iron); }
+.qz-track i.ok { background: var(--s); }
+.qz-track i.bad { background: var(--t); }
+.qz-card { min-height: 330px; }
+.qz-in { display: flex; flex-direction: column; gap: 18px; animation: qz-in .5s cubic-bezier(.16, 1, .3, 1); }
+@keyframes qz-in { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
+.qz-in .pill { align-self: flex-start; }
+.qz-q { quotes: "„" "“"; font-family: var(--display); font-size: clamp(1.7rem, 3.6vw, 2.6rem); line-height: 1.08; letter-spacing: .005em; color: var(--iron); text-wrap: balance; }
+.qz-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.qz-btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 58px; border-radius: 999px; border: 2px solid var(--line-2); background: var(--paper); font-weight: 700; font-size: 1.08rem; cursor: pointer; transition: transform .2s, background .25s, border-color .25s, color .25s, opacity .25s; }
+.qz-btn svg { width: 20px; height: 20px; }
+.qz-btn.yes { color: var(--s-ink); }
+.qz-btn.no { color: var(--t-ink); }
+.qz-btn.yes:not(:disabled):hover { border-color: var(--s); background: var(--s-soft); transform: translateY(-2px); }
+.qz-btn.no:not(:disabled):hover { border-color: var(--t); background: var(--t-soft); transform: translateY(-2px); }
+.qz-btn:disabled { cursor: default; opacity: .45; }
+.qz-btn.right { opacity: 1; border-color: var(--s); background: var(--s); color: #fff; }
+.qz-btn.wrong { opacity: 1; border-color: var(--t); background: var(--t); color: #fff; }
+.was-bad .qz-btn.wrong { animation: qz-shake .45s; }
+@keyframes qz-shake { 20%, 60% { transform: translateX(-6px); } 40%, 80% { transform: translateX(6px); } }
+.qz-fb:empty { display: none; }
+.qz-fb { border-radius: var(--r-md); background: var(--chalk); border: 1px solid var(--line); padding: 16px 18px; animation: qz-in .45s cubic-bezier(.16, 1, .3, 1); }
+.qz-fb p { margin: 6px 0 12px; color: var(--steel); }
+.qz-verdict strong { font-size: 1.1rem; }
+.qz-verdict.ok strong { color: var(--s-ink); }
+.qz-verdict.bad strong { color: var(--t-ink); }
+.qz-foot { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; }
+.qz-foot .src-ref { margin: 0; color: var(--muted); }
+.qz-foot .btn { padding: 11px 20px; }
+.qz-end { align-items: flex-start; }
+.qz-big { font-family: var(--display); font-size: clamp(3.2rem, 9vw, 5.4rem); line-height: 1; color: var(--muted); }
+.qz-big span { color: var(--iron); }
+.qz-verdict-big { margin: 0; font-size: 1.3rem; font-weight: 600; }
+.qz-end .small { margin: -8px 0 0; }
+.qz-miss { width: 100%; }
+.qz-miss .tag { font-size: .78rem; font-weight: 600; color: var(--muted); }
+.qz-miss ul { list-style: none; margin: 8px 0 0; padding: 0; display: grid; gap: 8px; }
+.qz-miss li { display: grid; grid-template-columns: auto 1fr; gap: 12px; align-items: start; padding: 12px 14px; border-radius: var(--r-md); background: var(--chalk); border: 1px solid var(--line); font-size: .95rem; color: var(--steel); }
+.qz-miss b { color: var(--iron); font-weight: 600; }
+.qz-sol { font-size: .75rem; font-weight: 700; border-radius: 999px; padding: 2px 9px; margin-top: 2px; white-space: nowrap; }
+.qz-sol.t-true { background: var(--s-soft); color: var(--s-ink); }
+.qz-sol.t-false { background: var(--t-soft); color: var(--t-ink); }
+.qz-actions.end { display: flex; flex-wrap: wrap; gap: 12px; }
+@media (max-width: 640px) {
+  .qz-card { min-height: 380px; }
+  .qz-actions { gap: 8px; }
+  .qz-btn { min-height: 54px; font-size: 1rem; }
+  .qz-foot .btn { width: 100%; justify-content: center; }
+}
