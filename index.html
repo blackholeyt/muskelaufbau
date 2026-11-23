@@ -58,15 +58,14 @@
       <span class="key"><i style="background:var(--s)"></i>Supplements</span>
     </div>
     <div class="hero-facts fade-in" style="--d:1s">
-      <div><b><span id="fact-src" data-count="630" data-suffix="+">630+</span></b><span>Studien, Meta-Analysen und Positionspapiere als Grundlage</span></div>
+      <div><b><span id="fact-src" data-count="630" data-suffix="+">630+</span></b><span>Quellen, vor allem Meta-Analysen und randomisierte Studien</span></div>
       <div><b><span data-count="5">5</span></b><span>Dinge machen den Großteil des Muskelaufbaus aus</span></div>
-      <div><b>2–5 kg</b><span>fettfreie Masse sind im nächsten Jahr realistisch</span></div>
+      <div><b><span data-count="63">63</span></b><span>Methoden im Rechner auf einer Skala verglichen</span></div>
     </div>
   </div>
   <div class="scroll-cue" aria-hidden="true"></div>
 </section>
 
-<div class="ticker" aria-hidden="true"><div class="ticker-track" id="ticker"></div></div>
 
 <!-- KAPITEL -->
 <section class="block" id="bereiche" style="padding-top:80px">
@@ -115,10 +114,8 @@
       <p class="lede">Volumen, Nähe zum Versagen und Progression tragen das Wachstum. Split, Periodisierung und Spezialtechniken sind Feintuning.</p>
     </div>
     <ul class="points">
-      <li><b>Steigern ist Pflicht.</b> Gewicht erhöhen, sobald der erste Satz das obere Ende des Wiederholungsbereichs bei 1–2 RIR erreicht. <span class="ev" data-ev="M"></span></li>
-      <li><b>10–16 harte Sätze pro Muskel und Woche</b>, indirekte Sätze zählen halb. Über ~20 kein gesicherter Zusatznutzen. <span class="ev" data-ev="M"></span></li>
-      <li><b>1–2 Wiederholungen vor dem Versagen.</b> Versagen nur im letzten Satz an Maschinen und Isolationsübungen, Kniebeuge und RDL nie. <span class="ev" data-ev="NM"></span></li>
-      <li><b>Upper-Lower mit 4 Einheiten</b> verteilt die Sätze am gleichmäßigsten. Push-Pull-Legs ist gleichwertig, wenn die Beine genug Sätze bekommen. <span class="ev" data-ev="M"></span></li>
+      <li><b>Die drei großen Hebel</b> stehen in der Rangfolge oben: steigern, 10–16 harte Sätze pro Muskel und Woche, 1–2 Wiederholungen vor dem Versagen. <span class="ev" data-ev="M"></span></li>
+      <li><b>Versagen nur im letzten Satz</b> an Maschinen und Isolationsübungen, Kniebeuge und Kreuzheben nie bis zum Versagen. <span class="ev" data-ev="NM"></span></li>
       <li><b>Gedehnte Varianten bei zweigelenkigen Muskeln:</b> Trizeps über Kopf, Beinbeuger sitzend, Wadenheben mit gestreckten Knien. <span class="ev" data-ev="NM"></span></li>
       <li><b>Meist 6–15 Wiederholungen.</b> Zwischen ~5 und ~30 wächst der Muskel gleich, wenn du nah ans Versagen gehst. <span class="ev" data-ev="M"></span></li>
       <li><b>Pausen nie unter 60 Sekunden</b>, schwere Grundübungen 2–3 Minuten. Bei Zeitnot lieber Gegenspieler-Supersätze. <span class="ev" data-ev="NM"></span></li>
@@ -138,20 +135,19 @@
         <div class="chart" id ="ch-exercise"></div>
         <p class="src">Kinoshita 2026, Maeo 2021 und 2023 (MRT, überwiegend Untrainierte).</p>
       </div>
-      <div class="panel wide">
-        <h3>Wochensätze pro Muskel im Plan</h3>
-        <p class="sub">Fraktional gezählt (indirekte Sätze halb). Das Band zeigt den Zielbereich 10–16.</p>
-        <div class="chart" id="ch-sets"></div>
-      </div>
     </div>
 
-    <div class="panel" style="margin-top:20px">
-      <h3>Dein Trainingsplan</h3>
-      <p class="sub">4 Einheiten pro Woche in der Reihenfolge Upper A → Lower A → Upper B → Lower B. Jede Einheit 18 Arbeitssätze, ~50 Minuten.</p>
-      <div class="tabs" role="tablist" id="plan-tabs"></div>
-      <div class="tbl-scroll" id="plan-table"></div>
-      <p class="src">„letzter 0“ = der letzte Satz der Übung geht bis zum Versagen. Bei Zeitnot: Gegenspieler paaren (Upper ~35, Lower ~47 min).</p>
-    </div>
+    <div class="panel splits-panel">
+      <h3>Welcher Split passt?</h3>
+      <p class="sub">Bei gleichen Wochensätzen bringt eine höhere Frequenz keinen gesicherten Vorteil <span class="ev" data-ev="M"></span>. Wichtig ist, dass jeder Muskel 10–16 harte Sätze pro Woche bekommt und die Einheiten in deine Zeit passen.</p>
+      <div class="splits">
+        <div class="splitcard"><div class="split-top"><h4>Upper-Lower</h4><span class="days">4 Tage</span></div><p>Oberkörper und Beine im Wechsel, jeder Muskel 2× pro Woche. Verteilt die Sätze am gleichmäßigsten und ist deshalb die naheliegende Wahl, wenn Beine und Oberkörper gleich wichtig sind.</p></div>
+        <div class="splitcard"><div class="split-top"><h4>Push-Pull-Legs</h4><span class="days">3–6 Tage</span></div><p>Gleichwertig vertretbar. Achte darauf, dass die Beine genug abbekommen: Beintag länger machen oder eine Hüftstreck-Übung wie Kreuzheben an den Pull-Tag legen, damit Quadrizeps und Hamstrings ≥ 10–12 Wochensätze bekommen.</p></div>
+        <div class="splitcard"><div class="split-top"><h4>PPL + Upper-Lower</h4><span class="days">5 Tage</span></div><p>Mischform für fünf Tage. Im Modell knapp hinter Upper-Lower und Push-Pull-Legs; einen direkten Studienvergleich gibt es nicht.</p></div>
+        <div class="splitcard"><div class="split-top"><h4>Ganzkörper</h4><span class="days">2–3 Tage</span></div><p>Wenn nur wenig Tage gehen. Die Frequenzdaten sprechen nicht dagegen, nur passen pro Einheit höchstens ~6–10 direkte Sätze je Muskel sinnvoll hinein.</p></div>
+      </div>
+      <p class="src">In 45 Minuten passen etwa 12–18 harte Sätze, in 60 Minuten 17–25. Das Zeitbudget wiegt schwerer als die Splitwahl. Eine Rangfolge der Splits beruht nur auf einem Modell (Evidenz sehr niedrig); „Ganzkörper“ ist eine Schlussfolgerung aus den Frequenz- und Volumendaten.</p>
+    </div></div>
   </div>
 </section>
 
@@ -164,10 +160,8 @@
       <p class="lede">Gesteuert wird über die Waage, nicht über eine feste Kalorienzahl. Timing, Verteilung und Proteinquelle sind zweitrangig, solange die Tagesmenge stimmt.</p>
     </div>
     <ul class="points">
-      <li><b>+250–400 kcal pro Tag</b>, Zunahme 0,25–0,5 % des Körpergewichts pro Woche, Start ≈ 0,3 %. <span class="ev" data-ev="N"></span></li>
-      <li><b>Täglich morgens wiegen</b>, nur den Wochenschnitt vergleichen und alle 2–3 Wochen um 100–150 kcal nachjustieren. <span class="ev" data-ev="NM"></span></li>
-      <li><b>Protein 1,8–2,0 g/kg</b>, mindestens 1,6; an harten Lauf- oder MTB-Tagen 2,0–2,2. <span class="ev" data-ev="M"></span></li>
-      <li><b>3–5 Proteinmahlzeiten à 0,4–0,55 g/kg.</b> Ein „anaboles Fenster“ von 30–60 Minuten gibt es nicht. <span class="ev" data-ev="M"></span></li>
+      <li><b>+250–400 kcal pro Tag</b>, Zunahme 0,25–0,5 % des Körpergewichts pro Woche. Täglich wiegen, nur den Wochenschnitt vergleichen. <span class="ev" data-ev="N"></span></li>
+      <li><b>Protein 1,8–2,0 g/kg</b> auf 3–5 Mahlzeiten. Ein „anaboles Fenster“ von 30–60 Minuten gibt es nicht. <span class="ev" data-ev="M"></span></li>
       <li><b>Menge vor Quelle.</b> Bei ≥ 1,6 g/kg wuchsen vegane und gemischte Kost gleich. <span class="ev" data-ev="NM"></span></li>
       <li><b>Fett 25–30 %, nie dauerhaft unter 20 %</b>, der Rest Kohlenhydrate. Keine Keto-Diät im Aufbau. <span class="ev" data-ev="N"></span></li>
       <li><b>Ausdauer ab ~60 min:</b> vorher essen, unterwegs 30–60 g Kohlenhydrate pro Stunde, danach ~30 g Protein. <span class="ev" data-ev="M"></span></li>
@@ -240,7 +234,7 @@
       <p class="lede">Supplements sind die leichteste Scheibe auf der Stange. Selbst Kreatin bringt vor allem Kraft und nur wenig zusätzlichen Muskel.</p>
     </div>
     <div class="tiers">
-      <div class="tier go"><h4>Nehmen</h4><div><p class="what">Kreatin-Monohydrat, ~3,4 g täglich (5 g vertretbar)</p><p>Ohne Ladephase, Zeitpunkt egal, als Pulver. Kraft +4,4 kg Oberkörper, +11,4 kg Unterkörper (Wang 2024). Beim Start knapp 1 kg Wasser auf der Waage. <span class="ev" data-ev="H"></span></p></div></div>
+      <div class="tier go"><h4>Nehmen</h4><div><p class="what">Kreatin-Monohydrat, 3–5 g täglich</p><p>Ohne Ladephase, Zeitpunkt egal, als Pulver; schon ~3,4 g reichen. Kraft +4,4 kg Oberkörper, +11,4 kg Unterkörper (Wang 2024). Beim Start knapp 1 kg Wasser auf der Waage. <span class="ev" data-ev="H"></span></p></div></div>
       <div class="tier maybe"><h4>Bei Bedarf</h4><div><p class="what">Proteinpulver, 0–1 Portion à 30–40 g Protein</p><p>Nur wenn 1,8–2,0 g/kg mit Essen nicht klappen. Whey-Konzentrat oder Soja/Erbse, Vanille statt Schoko (weniger Schwermetalle). 30 g Protein aus Whey kosten 1,10–1,80 €, aus Magerquark 0,45–0,60 €. <span class="ev" data-ev="M"></span></p></div></div>
       <div class="tier optional"><h4>Optional</h4><div><p class="what">Koffein, 1,5–2,5 mg/kg (≈ 1–2 Tassen Kaffee)</p><p>30–60 min vor Beintag, Morgentraining oder langer Ausdauereinheit. Akut ~3 % mehr Maximalkraft. Mindestens 9 h vor dem Schlafen, max. 400 mg/Tag. <span class="ev" data-ev="MH"></span></p></div></div>
       <div class="tier optional"><h4>Allenfalls</h4><div><p class="what">Citrullin, 6–8 g, nur Erwachsene</p><p>Akut vielleicht 1–3 Wiederholungen mehr über mehrere Sätze; der Effekt hält einer Bias-Korrektur nicht stand. <span class="ev" data-ev="N"></span></p></div></div>
@@ -264,33 +258,16 @@
     <div class="sec-tag"><span class="disc">15</span>Regeneration und Ausdauer</div>
     <div class="sec-head">
       <h2>Schlafen, essen, Belastung steuern</h2>
-      <p class="lede">Keine passive Maßnahme bringt mehr Muskel. Entscheidend ist, dass Laufen und MTB das Beintraining nicht stören und der Schlaf geschützt ist.</p>
+      <p class="lede">Keine passive Maßnahme bringt mehr Muskel. Entscheidend ist, dass Ausdauertraining das Beintraining nicht stört und der Schlaf geschützt ist.</p>
     </div>
     <ul class="points">
-      <li><b>Laufen und MTB behalten.</b> Bis ~3 Einheiten à 20–45 min pro Woche bremsen das Wachstum nicht messbar. <span class="ev" data-ev="M"></span></li>
-      <li><b>Kraft vor Ausdauer</b>, möglichst ≥ 6 h Abstand; harte oder lange Einheiten nie am Tag vor dem Beintraining. <span class="ev" data-ev="N"></span></li>
-      <li><b>7–9 h Schlaf</b> (unter 18: 8–10 h), feste Zeiten, 30–60 min mehr Bettzeit einplanen. <span class="ev" data-ev="N"></span></li>
-      <li><b>Nach kurzer Nacht trotzdem trainieren</b>, eher Upper statt Lower, Kniebeuge und RDL mit 1 RIR mehr. <span class="ev" data-ev="M"></span></li>
+      <li><b>Ausdauer behalten.</b> Bis ~3 Einheiten à 20–45 min pro Woche bremsen das Muskelwachstum nicht messbar. <span class="ev" data-ev="M"></span></li>
+      <li><b>Kraft vor Ausdauer</b>, möglichst ≥ 6 h Abstand. Harte oder lange Einheiten nicht am Tag vor dem Beintraining, höchstens 1–2 harte pro Woche. <span class="ev" data-ev="N"></span></li>
+      <li><b>7–9 h Schlaf</b> (unter 18: 8–10 h), feste Zeiten. Hartes Training und Kaffee nicht kurz vor dem Schlafen. <span class="ev" data-ev="N"></span></li>
+      <li><b>Nach kurzer Nacht trotzdem trainieren</b>, eher Oberkörper statt Beine, Kniebeuge und Kreuzheben mit 1 RIR mehr. <span class="ev" data-ev="M"></span></li>
       <li><b>Stresswochen: Erhaltungsmodus.</b> Alle Einheiten, 1 Satz weniger pro Übung, Grundübungen 2–3 RIR. <span class="ev" data-ev="N"></span></li>
-      <li><b>Kein Kältebad nach dem Krafttraining.</b> Es bremst das Wachstum wahrscheinlich etwas (−0,22; Piñero 2024). <span class="ev" data-ev="N"></span></li>
-      <li><b>Dehnen nur für Beweglichkeit</b>, vor dem Training unter 60 s pro Muskel. Gegen Muskelkater hilft es nicht. <span class="ev" data-ev="M"></span></li>
-      <li><b>Massage, Rolle, Kompression, Sauna nach Gefühl.</b> Sie lindern Muskelkater, schneller stark wirst du nicht. <span class="ev" data-ev="NM"></span></li>
+      <li><b>Kein Kältebad nach dem Krafttraining.</b> Dehnen, Massage und Rolle nur für Beweglichkeit und Muskelkater, mehr Muskel bringen sie nicht. <span class="ev" data-ev="N"></span></li>
     </ul>
-
-    <div class="panel" style="margin-top:36px">
-      <h3>Wochenvorlage mit Laufen und MTB</h3>
-      <p class="sub">So liegen die Beineinheiten 3–4 Tage auseinander, und keine harte Ausdauer landet am Tag vor Lower.</p>
-      <div class="week">
-        <div class="day str"><span class="d">Mo</span><span class="w">Upper A</span><span class="x">Sonntag war frei oder locker</span></div>
-        <div class="day str"><span class="d">Di</span><span class="w">Lower A</span><span class="x">Montag war kein harter Ausdauertag</span></div>
-        <div class="day end"><span class="d">Mi</span><span class="w">Intervalle oder Tempolauf</span><span class="x">Morgen kommt Upper, nicht Lower</span></div>
-        <div class="day str"><span class="d">Do</span><span class="w">Upper B</span><span class="x">&nbsp;</span></div>
-        <div class="day str"><span class="d">Fr</span><span class="w">Lower B</span><span class="x">Donnerstag war kein harter Ausdauertag</span></div>
-        <div class="day end"><span class="d">Sa</span><span class="w">Lange MTB-Tour oder langer Lauf</span><span class="x">Am Tag nach Lower erlaubt</span></div>
-        <div class="day free"><span class="d">So</span><span class="w">Frei oder 20–40 min locker</span><span class="x">Am Tag vor Upper beliebig</span></div>
-      </div>
-      <div class="legend" style="margin-top:12px"><span class="key"><i style="background:var(--t)"></i>Krafttraining</span><span class="key"><i style="background:var(--r)"></i>Ausdauer</span></div>
-    </div>
 
     <div class="grid-2" style="margin-top:20px">
       <div class="panel">
@@ -313,10 +290,10 @@
       <table class="plan">
         <thead><tr><th style="width:38%">Situation</th><th>Anpassung</th></tr></thead>
         <tbody>
-          <tr><td>eine kurze Nacht</td><td>trotzdem trainieren; wenn möglich Upper statt Lower; Kniebeuge und RDL +1 RIR, keine Rekordversuche</td></tr>
+          <tr><td>eine kurze Nacht</td><td>trotzdem trainieren; wenn möglich Oberkörper statt Beine; Kniebeuge und Kreuzheben +1 RIR, keine Rekordversuche</td></tr>
           <tr><td>2–3 kurze Nächte in Folge</td><td>schwere Grundübungen ~⅓ weniger Sätze oder auf Maschinen; Isolation normal</td></tr>
-          <tr><td>nach stundenlangem Lernen oder einer Prüfung</td><td>Beintag verschieben; sonst Upper statt Lower oder Erhaltungsmodus</td></tr>
-          <tr><td>harte oder lange Ausdauer am Vortag, heute Lower</td><td>Upper und Lower tauschen; sonst Kniebeuge und RDL +1 RIR</td></tr>
+          <tr><td>nach stundenlangem Lernen oder einer Prüfung</td><td>Beintag verschieben; sonst Oberkörper statt Beine oder Erhaltungsmodus</td></tr>
+          <tr><td>harte oder lange Ausdauer am Vortag, heute Beintag</td><td>Einheiten tauschen; sonst Kniebeuge und Kreuzheben +1 RIR</td></tr>
           <tr><td>im ersten Arbeitssatz ≥ 2 Wiederholungen weniger als zuletzt</td><td>Rest der Einheit im Erhaltungsmodus</td></tr>
           <tr><td>Stress- oder Prüfungswoche</td><td>ganze Woche Erhaltungsmodus; Ausdauer nur locker; Essen und Schlafzeiten schützen</td></tr>
           <tr><td>starker Muskelkater</td><td>normal weitertrainieren, Aufwärmsätze; Muskelkater ist kein Maß für Wachstum</td></tr>
@@ -370,7 +347,7 @@
         <ol class="routine">
           <li><b>Täglich</b><span>morgens wiegen; Protein auf 3–5 Mahlzeiten; Kreatin; 7–9 h Schlaf</span></li>
           <li><b>Jede Einheit</b><span>jeden Satz notieren (Gewicht, Wiederholungen, RIR); Tagescheck im ersten Satz</span></li>
-          <li><b>Wöchentlich</b><span>4 Einheiten nach Vorlage; Wochenschnitt der Waage bilden</span></li>
+          <li><b>Wöchentlich</b><span>Einheiten nach deinem Split; Wochenschnitt der Waage bilden</span></li>
           <li><b>Alle 2–3 Wochen</b><span>Kalorien um ±100–150 kcal anpassen</span></li>
           <li><b>Alle 3–4 Wochen</b><span>RIR eichen: letzten Satz einer Maschinenübung erst schätzen, dann bis zum Versagen</span></li>
           <li><b>Alle 4 Wochen</b><span>Leistungs-Check in 4–6 Leitübungen; Taille, Oberarm, Oberschenkel, Wade; Fotos</span></li>
@@ -384,7 +361,7 @@
         <details class="fold" open><summary>Waage steigt nicht</summary><div class="inner">Ausdauerwochen und Wochenenden mitgerechnet? Kreatin-Start oder lange Touren als Störfaktor? Dann <strong>+100–150 kcal</strong>.</div></details>
         <details class="fold"><summary>Taille wächst, Kraft stagniert</summary><div class="inner">Wochenschnitt steigt über 0,5 % pro Woche: <strong>−100–150 kcal</strong>.</div></details>
         <details class="fold"><summary>Eine Übung stagniert</summary><div class="inner">Drei Einheiten ohne Steigerung bei gleicher RIR: Waage, Schlaf und harte Ausdauer davor prüfen. Dann 1–2 Wochen einen Satz weniger oder am Blockende die Übung tauschen.</div></details>
-        <details class="fold"><summary>Beinübungen stagnieren</summary><div class="inner">Essen (Waage) und Ausdauer am Vortag prüfen; harte oder lange Ausdauer reduzieren oder weiter vom Lower-Tag weglegen.</div></details>
+        <details class="fold"><summary>Beinübungen stagnieren</summary><div class="inner">Essen (Waage) und Ausdauer am Vortag prüfen; harte oder lange Ausdauer reduzieren oder weiter vom Beintag weglegen.</div></details>
         <details class="fold"><summary>Nach 3 Monaten nichts gewachsen</summary><div class="inner">1. Training: wirklich 1–2 RIR, 10–16 Sätze, Progression protokolliert? 2. Essen: Wochenschnitt steigt, 1,8–2,0 g/kg? 3. Erholung: Schlaf, Stress, Ausdauer vor dem Beintag? Erst dann +2–4 Wochensätze für die betroffenen Muskeln. „Schlechte Gene“ kommen ganz zum Schluss.</div></details>
       </div>
     </div>
@@ -482,7 +459,7 @@
         <h3>Wo die Datenlage am dünnsten ist</h3>
         <ul class="small" style="margin:0;padding-left:1.1em;color:var(--steel);display:grid;gap:6px">
           <li>Die großen Effekte (Progression, gedehnte Übungen) stammen meist von Untrainierten.</li>
-          <li>Krafttraining im Überschuss plus Laufen, MTB und Prüfungsstress wurde nie zusammen untersucht.</li>
+          <li>Krafttraining im Überschuss plus regelmäßige Ausdauer und Prüfungsstress wurde nie zusammen untersucht.</li>
           <li>Für Schlaf und Stress ist nicht gemessen, wie viel Muskel sie bei Trainierten kosten.</li>
           <li>Brust, Rücken und Schulter: kaum Studien zur Übungswahl; kein direkter Vergleich von Splits.</li>
           <li>Jugendliche: zu Muskelwachstum, Kreatin und den meisten Supplements kaum Daten.</li>
@@ -502,8 +479,8 @@
   <div class="wrap">
     <p class="outro" aria-label="Steigern. Essen. Schlafen."><span>Steigern.</span><span>Essen.</span><span>Schlafen.</span></p>
     <div class="cols">
-      <p><strong style="color:var(--iron)">Stand: 19.11.2026.</strong> Zusammenfassung der Recherchen im Projekt „Sport/ Ernährung“. Nächste Prüfung der schnell wandernden Themen (Volumen, Versagen, Protein, Ausdauer) ab Mai 2027.</p>
-      <p>Keine medizinische Beratung. Die Muskelpunkte sind abgeleitete Schätzungen, keine Messwerte. Schriften: Anton und Fira Sans (SIL Open Font License), lokal eingebunden.</p>
+      <p><strong style="color:var(--iron)">Stand: <span id="stand">19.11.2026</span>.</strong> Eine Sammlung eigener Rechercheergebnisse zum Muskelaufbau. Die Inhalte werden vierteljährlich auf neue Studien geprüft. Keine medizinische Beratung; die Muskelpunkte sind abgeleitete Schätzungen, keine Messwerte.</p>
+      <p><strong style="color:var(--iron)">Datenschutz.</strong> Die Seite wird über GitHub Pages bereitgestellt; GitHub verarbeitet dabei technisch notwendige Daten wie deine IP-Adresse (siehe <a href="https://docs.github.com/de/site-policy/privacy-policies/github-general-privacy-statement" target="_blank" rel="noopener">Datenschutzerklärung von GitHub</a>). Die Seite selbst setzt keine Cookies, nutzt keine Analyse-Tools und lädt nichts von Drittanbietern. Deine Auswahl im Rechner und der Hell/Dunkel-Modus werden nur lokal in deinem Browser gespeichert. Schriften: Anton und Fira Sans (SIL Open Font License).</p>
     </div>
   </div>
 </footer>

@@ -167,10 +167,10 @@ const GROUPS = [
     { id: "on", label: "An", myth: true, mp: 0, lp: 0, em: "N", el: "N", why: "Natürliche Methoden senken Myostatin messbar, aber die Senkung sagt den Zuwachs nicht voraus (Kim 2007)." }
   ]},
   // REGENERATION
-  { id: "cardio", block: "R", doc: "R1", title: "Laufen und MTB", unit: "Ausdauer neben dem Krafttraining", options: [
+  { id: "cardio", block: "R", doc: "R1", title: "Ausdauer", unit: "Laufen, Rad o. Ä. neben dem Krafttraining", options: [
     { id: "none", label: "Keine Ausdauer", std: true, myth: true, mp: 0, lp: 0 },
-    { id: "plan", label: "2–3× moderat, gut geplant", rec: true, mp: 0, lp: -3, em: "M", el: "NM", why: "Schumann 2022: ganzer Muskel SMD −0,01. Geplant heißt: Kraft zuerst, ≥ 6 h Abstand, nichts Hartes am Tag vor Lower." },
-    { id: "bad", label: "Ungeplant (direkt vor Kraft, hart vor Lower)", mp: -8, lp: -20, em: "N", el: "NM", why: "Faserebene −0,23 (Lundberg 2022). Gleiche Einheit bremste den Beinkraftzuwachs (Petré 2021), akut Beinkraft SMD 0,79 (Markov 2022)." }
+    { id: "plan", label: "2–3× moderat, gut geplant", rec: true, mp: 0, lp: -3, em: "M", el: "NM", why: "Schumann 2022: ganzer Muskel SMD −0,01. Geplant heißt: Kraft zuerst, ≥ 6 h Abstand, nichts Hartes am Tag vor dem Beintraining." },
+    { id: "bad", label: "Ungeplant (direkt vor Kraft, hart vor dem Beintag)", mp: -8, lp: -20, em: "N", el: "NM", why: "Faserebene −0,23 (Lundberg 2022). Gleiche Einheit bremste den Beinkraftzuwachs (Petré 2021), akut Beinkraft SMD 0,79 (Markov 2022)." }
   ]},
   { id: "sleep", block: "R", doc: "R2", title: "Schlaf", unit: "pro Nacht, gewohnheitsmäßig", options: [
     { id: "s5", label: "≤ 5 h", mp: -10, lp: -40, em: "SN", el: "NM", why: "Schätzung: 5 Nächte à 4 h senkten die Muskelproteinsynthese um 19 % (Saner 2020); akuter Schlafverlust kostete 7,6 % Leistung (Craven 2022)." },

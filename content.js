@@ -70,7 +70,7 @@ const MACROS = [
   { k: "Ruhetag", p: 150, f: 85, c: 335 },
   { k: "Krafttag", p: 150, f: 90, c: 400 },
   { k: "Kraft + lockere Ausdauer", p: 150, f: 90, c: 450 },
-  { k: "Lange Lauf-/MTB-Einheit", p: 160, f: 95, c: 525 }
+  { k: "Lange Ausdauereinheit", p: 160, f: 95, c: 525 }
 ];
 
 const MYTHS = [

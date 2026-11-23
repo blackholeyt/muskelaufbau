@@ -104,7 +104,7 @@
     };
     drawSide(1); drawSide(-1);
     // Faktor-Marke
-    if (Math.abs(factor - 1) > 0.001 && !opt.mini && w >= 560) {
+    if (Math.abs(factor - 1) > 0.001 && !opt.mini && !opt.noFactor && w >= 560) {
       const fx = w / 2;
       s += '<text x="' + fx + '" y="' + r1(cy - H * 0.11) + '" text-anchor="middle" class="plate-label strong"' + (dark ? ' style="fill:#eef0f3"' : "") + '>' + d.factors.map(f => esc(SHORT[f.g.id + ":" + f.o.id] || f.o.label)).join(" · ") + " × " + de(factor, 2) + "</text>";
     }
@@ -390,7 +390,6 @@
     const rows = PLAN[planTab];
     $("#plan-table").innerHTML = '<table class="plan"><thead><tr><th>Übung</th><th>Sätze × Wdh.</th><th>RIR</th><th>Pause</th></tr></thead><tbody>' + rows.map(r => "<tr><td>" + esc(r[0]) + '</td><td class="n">' + r[1] + '</td><td class="n">' + r[2] + '</td><td class="n">' + r[3] + "</td></tr>").join("") + "</tbody></table>";
   }
-  $("#plan-tabs").addEventListener("click", e => { const b = e.target.closest("button"); if (!b) return; planTab = b.textContent; renderPlan(); });
 
   /* ---------- Mythen ---------- */
   let mythF = "all";
@@ -523,21 +522,55 @@
   try { const t = localStorage.getItem("ma-theme"); if (t) document.documentElement.dataset.theme = t; } catch (e) {}
 
   /* ---------- Start ---------- */
+  /* ---------- Tabellenansicht zu jeder Grafik (ohne Hover lesbar, auch für Screenreader) ---------- */
+  function tableData(id) {
+    const m = rowsByKey(), ev = k => k ? EV[k].label : "–";
+    const methodRows = keys => keys.map(k => m[k]).filter(Boolean).map(r => [SHORT[r.key] || r.g.title, BLOCKS[r.g.block], sgn(r.mp), sgn(r.lp), ev(r.o.em)]);
+    const mHead = ["Methode", "Bereich", "MP", "LP", "Evidenz (Muskel)"];
+    switch (id) {
+      case "ch-levers": return { head: mHead, rows: methodRows(["kcal:d500", "prog:p0", "kcal:d250", "reps:rh", "macro:keto", "rom:sp", "cardio:bad", "cold:on", "rest:r60", "vol:v16", "prot:p19", "ex:e1", "meals:on", "rir:r12", "kcal:s300", "krea:on", "sleep:s8"]).sort((a, b) => parseFloat(b[2].replace("−", "-").replace(",", ".")) - parseFloat(a[2].replace("−", "-").replace(",", "."))) };
+      case "ch-volume": return { head: ["Harte Sätze pro Woche", "Wachstum in ~10 Wochen"], rows: [[6, "3,0 %"], [10, "4,2 %"], [12, "4,7 %"], [16, "5,6 %"], [20, "6,4 %"], [24, "7,1 % (über 20 unsicher)"]] };
+      case "ch-exercise": return { head: ["Muskel", "Übung", "Wachstum", "Vergleich", "Wachstum", "Quelle"], rows: EXERCISE.map(e => [e.m, e.a[0], "+" + de(e.a[1]) + " %", e.b[0], "+" + de(e.b[1]) + " %", e.src]) };
+      case "ch-kcal": return { head: ["Kalorienbilanz pro Tag", "Wachstum relativ zur Erhaltung", "Grundlage"], rows: [["−500 kcal", "kein Zuwachs", "Murphy & Koehler 2022"], ["−250 kcal", "× 0,5", "Schätzung"], ["±0 kcal", "× 1", "Vergleich"], ["+250–400 kcal", "× 1,1", "Schätzung"], ["+500 kcal und mehr", "× 1,15", "Schätzung"]] };
+      case "ch-helms": return { head: ["Gruppe", "Hautfalten", "Gewicht", "Muskeldicke"], rows: [["Erhaltung", "−1,4 mm", "+0,4 kg", "gleich"], ["~5 % Überschuss", "+10,0 mm", "+3,3 kg", "gleich"], ["~15 % Überschuss", "+12,4 mm", "+3,3 kg", "gleich"]] };
+      case "ch-protein": return { head: ["Protein pro kg", "Anteil des möglichen Effekts"], rows: [["1,2 g", "0 % (Ausgangswert)"], ["1,6 g", "~80 %"], ["1,8–2,0 g", "100 %"], ["2,2 g", "100 %"], ["3 g und mehr", "100 %, kein Zusatznutzen"]] };
+      case "ch-macros": return { head: ["Tag (Beispiel 75 kg)", "Protein", "Fett", "Kohlenhydrate", "kcal"], rows: MACROS.map(d => [d.k, d.p + " g", d.f + " g", d.c + " g", (d.p * 4 + d.f * 9 + d.c * 4).toLocaleString("de-DE")]) };
+      case "ch-supps": return { head: mHead, rows: methodRows(["krea:on", "caf:on", "pre:on", "bcaa:on", "ba:on", "cit:on", "whey:on", "eaa:on", "hmb:on", "myo:on"]) };
+      case "ch-regen": return { head: mHead, rows: methodRows(["sleep:s8", "sleep:s5", "stress:on", "cold:on", "stretchpre:on", "stretchlong:on", "massage:on", "compress:on", "nap:on", "late:on", "sauna:on", "hrv:on"]) };
+      case "ch-sleep": return { head: ["Messgröße", "Veränderung", "Quelle"], rows: SLEEP.map(d => [d.k, d.lo !== undefined ? "−10 bis −15 %" : de(d.v, 2) + " %", d.src]) };
+      case "ch-scale": return { head: ["Größe", "kg"], rows: SCALE.map(d => [d.k, d.approx ? "bis ~" + de(d.hi) : de(d.lo) + "–" + de(d.hi)]) };
+      case "ch-response": return { head: ["Studie", "Spanne", "Mittelwert"], rows: RESPONSE.map(d => [d.k, de(d.lo) + " bis " + (d.open ? "über " : "") + de(d.hi) + " %", "+" + de(d.mean) + " %"]) };
+      case "ch-scatter": return { head: mHead, rows: allRows(true).sort((a, b) => b.mp - a.mp).map(r => [SHORT[r.key] || (r.g.title + (r.g.toggle ? "" : " · " + r.o.label)), BLOCKS[r.g.block], sgn(r.mp), sgn(r.lp), ev(r.o.em)]) };
+    }
+    return null;
+  }
+  function renderTables() {
+    $$(".chart[id]").forEach(el => {
+      const d = tableData(el.id); if (!d) return;
+      let box = document.getElementById("tv-" + el.id);
+      if (!box) { box = document.createElement("details"); box.className = "tview"; box.id = "tv-" + el.id; el.after(box); }
+      const open = box.open;
+      box.innerHTML = "<summary>Werte als Tabelle</summary><div class=\"tbl-scroll\"><table class=\"data\"><thead><tr>" + d.head.map(h => "<th>" + esc(h) + "</th>").join("") + "</tr></thead><tbody>" +
+        d.rows.map(r => "<tr>" + r.map((c, i) => "<td" + (i && /^[+−±\d×~]/.test(String(c)) ? ' class="n"' : "") + ">" + esc(c) + "</td>").join("") + "</tr>").join("") + "</tbody></table></div>";
+      box.open = open;
+    });
+  }
   let heroDone = false;
   function renderCharts() {
     TIPS.clear();
-    barbell($("#hero-bar"), presetPlan("rec"), { intro: !heroDone, d0: 1.0, dark: true, label: "Empfohlener Plan als beladene Hantel", center: "Basis 34 MP · empfohlener Plan 72 MP ≈ 3,5 kg fettfreie Masse pro Jahr" });
-    chLevers(); chVolume(); chExercise(); chSets(); chKcal(); chHelms(); chProtein(); chMacros();
+    barbell($("#hero-bar"), presetPlan("rec"), { intro: !heroDone, d0: 1.0, dark: true, label: "Empfohlener Plan als beladene Hantel", noFactor: true });
+    chLevers(); chVolume(); chExercise(); chKcal(); chHelms(); chProtein(); chMacros();
     pairChart($("#ch-supps"), ["krea:on", "caf:on", "pre:on", "bcaa:on", "ba:on", "cit:on", "whey:on", "eaa:on", "hmb:on", "myo:on"], "var(--s)", "Supplements: Muskel- und Leistungspunkte");
     pairChart($("#ch-regen"), ["sleep:s8", "sleep:s5", "stress:on", "cold:on", "stretchpre:on", "stretchlong:on", "massage:on", "compress:on", "nap:on", "late:on", "sauna:on", "hrv:on"], "var(--r)", "Regeneration: Muskel- und Leistungspunkte");
     chSleep(); chScale(); chResponse();
     const pickScatter = k => { scatterFilter = k; chScatter(); chipRow($("#scatter-filter"), scatterFilter, pickScatter); };
     chipRow($("#scatter-filter"), scatterFilter, pickScatter);
     chScatter();
+    renderTables();
     updateScore();
     heroDone = true;
   }
-  renderPlan(); renderMyths(); renderPresets(); renderForm(); renderCharts();
+  renderMyths(); renderPresets(); renderForm(); renderCharts();
   /* ---------- Bühne: Scheiben, Laufband, Einblenden, Scroll-Effekte ---------- */
   let plateUid = 0;
   function plateSVG(color, kg, name, ink) {
@@ -584,13 +617,6 @@
     sec.insertBefore(d, sec.firstChild); orns.push(d);
   });
 
-  /* Laufband */
-  const TICK = [["t", "Ohne Steigern nur halbes Wachstum", "Kassiano 2026"], ["t", "10–16 harte Sätze pro Muskel", "Pelland 2026"], ["t", "1–2 Wiederholungen vor dem Versagen", "Refalo 2024"],
-    ["e", "1,8–2,0 g Protein pro kg", "Morton 2018"], ["e", "500 kcal Defizit = kein Zuwachs", "Murphy & Koehler 2022"], ["e", "+250–400 kcal Überschuss reichen", "Helms 2023"],
-    ["s", "Kreatin: +11,4 kg Beinkraft", "Wang 2024"], ["r", "7–9 Stunden Schlaf", "Saner 2020"], ["r", "Kein Kältebad nach dem Training", "Piñero 2024"], ["t", "2–5 kg Muskel pro Jahr realistisch", "Q2"]];
-  const tickHTML = TICK.map(([k, t, src]) => '<span class="ticker-item"><svg viewBox="0 0 22 22"><circle cx="11" cy="11" r="10" fill="' + PLATES[k].c + '" stroke="rgba(255,255,255,.9)" stroke-width="1.5"/><circle cx="11" cy="11" r="3.2" fill="#eceff1"/></svg>' + esc(t) + " <small>" + esc(src) + "</small></span>").join("");
-  $("#ticker").innerHTML = tickHTML + tickHTML;
-
   /* Überschriften wortweise */
   $$("section.block h2").forEach(h => {
     const words = h.textContent.trim().split(/\s+/);
@@ -602,10 +628,10 @@
   /* Reiter in den Abschnitten: weniger Scrollen, klare Gliederung */
   const TABS = {
     prioritaeten: ["Die 8 Hebel", "Alle Hebel als Grafik"],
-    training: ["Kernpunkte", "Grafiken", "Trainingsplan"],
+    training: ["Kernpunkte", "Grafiken", "Splits"],
     ernaehrung: ["Kernpunkte", "Grafiken", "Beispieltag & Steuerung"],
     supplements: ["Empfehlung", "Grafik", "Empfehlung"],
-    regeneration: ["Kernpunkte", "Wochenplan", "Grafiken", "Tagesform"],
+    regeneration: ["Kernpunkte", "Grafiken", "Tagesform"],
     erwartungen: ["Die Zahlen", "Grafiken", "Routine & Fehlersuche"]
   };
   let tabUid = 0;
